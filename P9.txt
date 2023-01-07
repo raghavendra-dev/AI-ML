@@ -1,0 +1,17 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import statsmodels.api as sm
+import math
+n=100
+x = np.linspace(0, 2 * math.pi, n)
+y = np.sin(x) + 0.3*np.random.randn(n)
+lowess = sm.nonparametric.lowess(y, x, frac=.3)
+lowess_x = list(zip(*lowess))[0]
+lowess_y = list(zip(*lowess))[1]
+plt.clf()
+plt.plot(x, y, label='y noisy')
+plt.plot(lowess_x, lowess_y, label='y pred')
+plt.legend()
+plt.show()
+print("X :", x)
+print("Y : " ,y)
